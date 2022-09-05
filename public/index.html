@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>load data</title>
+</head>
+<body>
+    <select name="Regions" id="regions" style="width:150px;">
+        <option value="Northwest">NW</option>
+        <option value="Southwest">SW</option>
+        <option value="West">WE</option>
+        <option value="Littoral">LT</option>
+    </select>
+    <button onclick="checkdata()">check data</button>
+    <script>
+        async function checkdata(){
+            let select = document.getElementById('regions')
+            let value = select.options[select.selectedIndex].value
+            let obj = { reg: value}
+            let config = {
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify(obj) 
+            }
+            
+            let res = await fetch('/data',config)
+            let data = await res.json()
+            console.log(data)
+        }
+        // async function data(){
+        //     let data = await fetch('https://api.geoapify.com/v1/ipinfo?&apiKey=2fe3fe325ed9460fa19f7cfc7b771676')
+        //     let fdata = await data.json()
+        //     console.log(fdata)
+        // }
+        // document.addEventListener('DOMContentLoaded',data)
+        let data = [1,3,45]
+        data = [...3]
+        console.log(data)
+        
+    </script>
+</body>
+</html>
