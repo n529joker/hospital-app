@@ -2,11 +2,13 @@ const express = require('express')
 const cors = require('cors')
 const { MongoClient, ServerApiVersion } = require('mongodb')
 const app = express()
+const port = process.env.PORT || 5000
 
 app.use(cors())
 app.use(express.json())
 app.use(express.static('public'))
-app.listen(5000,console.log('Listening on 5k')) 
+
+app.listen(port) 
 
 const uri = "mongodb+srv://infinitycloud:Rawlings004@infinitycloud.0vlqb7r.mongodb.net?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
