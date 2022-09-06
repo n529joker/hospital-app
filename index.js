@@ -3,9 +3,11 @@ const cors = require('cors')
 const axios = require('axios')
 const { MongoClient, ServerApiVersion } = require('mongodb')
 const app = express()
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 3000
 
-app.use(cors())
+app.use(cors({
+  origin:'http://127.0.0.1:5500'
+}))
 app.use(express.json())
 //app.use(express.static('public'))
 
@@ -21,7 +23,7 @@ async function fetchData(data){
     const ids = client.db("forApp").collection("hospitals")
     ids.find({'reg':{'$eq':data}}).toArray((err, result)=> {
       console.log(result);
-       res.send('result')
+       res.jsonp(result)
     })
 });
   }catch(ex){
@@ -32,7 +34,7 @@ async function fetchData(data){
   }
 }
 
-app.listen(port, console.log('Live')) 
+app.listen(port) 
 app.get('/',async(req, res)=>{
   let data = await axios('https://api.geoapify.com/v1/ipinfo?&apiKey=2fe3fe325ed9460fa19f7cfc7b771676')
   let fdata = await data.data

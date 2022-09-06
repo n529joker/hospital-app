@@ -27,7 +27,7 @@
                 body:JSON.stringify(obj) 
             }
             
-            let res = await fetch('/data',config)
+            let res = await fetch('https://hospitalcmr.herokuapp.com/data',config,{mode: 'no-cors'})
             let data = await res.json()
             console.log(data)
         }
