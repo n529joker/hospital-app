@@ -19,14 +19,14 @@ let collection;
 
  
 app.get('/',async(req, res)=>{
-  let data = await axios('https://api.geoapify.com/v1/ipinfo?&apiKey=2fe3fe325ed9460fa19f7cfc7b771676')
-  let fdata = await data.data
+  // let data = await axios('https://api.geoapify.com/v1/ipinfo?&apiKey=2fe3fe325ed9460fa19f7cfc7b771676')
+  // let fdata = await data.data
   //console.log(fdata);
   try{
     await client.connect(err => {
     console.log("MongoDB connected")
     const ids = client.db("forApp").collection("hospitals")
-    ids.find({'reg':{'$eq':fdata.state.name}}).toArray((err, result)=> {
+    ids.find({'reg':{'$eq':'Littoral'}}).toArray((err, result)=> {
       console.log(result);
        res.json(result)
     })
