@@ -1,5 +1,5 @@
 const express = require('express')
-const satelize = require('satelize')
+//const satelize = require('satelize')
 const cors = require('cors')
 const axios = require('axios')
 const { MongoClient, ServerApiVersion } = require('mongodb')
@@ -23,7 +23,7 @@ app.get('/',async(req, res)=>{
 //   let state;
 //   satelize.satelize({ip:ip}, function(err, payload){
 //     state = payload.state.name
-  })
+  //})
   try{
     await client.connect(err => {
     console.log("MongoDB connected")
