@@ -1,4 +1,6 @@
 const express = require('express')
+const satelize = require('satelize')
+const address = require('address')
 const cors = require('cors')
 const axios = require('axios')
 const { MongoClient, ServerApiVersion } = require('mongodb')
@@ -16,21 +18,21 @@ const uri = "mongodb+srv://infinitycloud:Rawlings004@infinitycloud.0vlqb7r.mongo
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 let collection;
-
  
 app.get('/',async(req, res)=>{
-  // let data = await axios('https://api.geoapify.com/v1/ipinfo?&apiKey=2fe3fe325ed9460fa19f7cfc7b771676')
-  // let fdata = await data.data
-  //console.log(fdata);
+  let ip = req.ip
+  let state;
+  satelize.satelize({ip:ip}, function(err, payload){
+    state = payload.state.name
+  })
   try{
     await client.connect(err => {
     console.log("MongoDB connected")
     const ids = client.db("forApp").collection("hospitals")
-    ids.find({'reg':{'$eq':'Littoral'}}).toArray((err, result)=> {
-      console.log(result);
-       res.json(result)
+    ids.find({'reg':{'$eq':state}}).toArray((err, result)=> {
+       res.jsonp(result)
     })
-});
+}); 
   }catch(ex){
     console.error(ex)
   }
@@ -60,4 +62,4 @@ app.post('/data',async (req,res)=>{
 })
 app.listen(port,()=>{
   console.log(`app running on port ${port}`);
-})
+}) 
