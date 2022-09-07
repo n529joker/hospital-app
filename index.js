@@ -19,16 +19,16 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 let collection;
  
 app.get('/',async(req, res)=>{
-  let ip = req.ip
-  let state;
-  satelize.satelize({ip:ip}, function(err, payload){
-    state = payload.state.name
+//   let ip = req.ip
+//   let state;
+//   satelize.satelize({ip:ip}, function(err, payload){
+//     state = payload.state.name
   })
   try{
     await client.connect(err => {
     console.log("MongoDB connected")
     const ids = client.db("forApp").collection("hospitals")
-    ids.find({'reg':{'$eq':state}}).toArray((err, result)=> {
+    ids.find({'reg':{'$eq':"Littoral"}}).toArray((err, result)=> {
        res.jsonp(result)
     })
 }); 
