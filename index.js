@@ -1,6 +1,5 @@
 const express = require('express')
 const satelize = require('satelize')
-const address = require('address')
 const cors = require('cors')
 const axios = require('axios')
 const { MongoClient, ServerApiVersion } = require('mongodb')
