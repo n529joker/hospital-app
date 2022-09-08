@@ -9,40 +9,44 @@
 <body>
     <button onclick="getData()">check</button>
     <script>
-        document.addEventListener('DOMContentLoaded',getData)
-        async function getData(){
+   document.addEventListener('DOMContentLoaded',getData)
+   async function getData(){
      try{
-       let data = await fetch('https://ipgeolocation.abstractapi.com/v1/?api_key=ae155d7394704c93be9c72486e2bd7f5')
-       let fdata = await data.json()
-       console.log(fdata)
-       let reg = localStorage.getItem('region')
+           let data = await fetch('https://ipgeolocation.abstractapi.com/v1/?api_key=ae155d7394704c93be9c72486e2bd7f5')
+           let fdata = await data.json()
+           let reg = localStorage.getItem('region')
        if(reg == null || reg == undefined || reg !== fdata.region){
-        localStorage.setItem('region',`${fdata.region}`)
-        alert('New Region added!')
+            localStorage.setItem('region',`${fdata.region}`)
+            alert('New Region added!')
        }else{
-        let RE = localStorage.getItem('region')
+            let RE = localStorage.getItem('region')
         let reg = {
             region:RE
         }
-        let data = {
-            method: 'POST',
-            header:{
-                'Content-Type':'application/json'
-            },
-            body: JSON.stringify(reg)
-        }
-        let sdata = await fetch('https://hospitalcmr.herokuapp.com/data', data)
-        let resdata = await sdata.json()
-        console.log(resdata)
+         await getLocalData(reg)
        }
-
     }
     catch(ex){
         console.log('Request failed ', ex);
-     }
-}
-
-
-    </script>
+        }
+      }
+ async function getLocalData(region){
+   let data = {
+       method: 'POST',
+       header:{
+          'Content-Type':'application/json'
+        },
+       body: JSON.stringify(region)
+      }
+    try{       
+        let sdata = await fetch('https://hospitalcmr.herokuapp.com/data', data)
+        let resdata = await sdata.json()
+        console.log(resdata)
+        }
+        catch(ex){
+            console.log(ex)
+        }
+   }
+</script>
 </body>
 </html>
