@@ -42,14 +42,13 @@ app.get('/',async(req, res)=>{
 })
 
 app.post('/data',async (req,res)=>{
-  let region = req.body.region
+  let Region = req.body.region
   try{
     await client.connect(err => {
     console.log("MongoDB connected")
     const ids = client.db("forApp").collection("hospitals")
-    ids.find({'reg':{'$eq':region}}).toArray((err, result)=> {
-      console.log(result);
-       res.jsonp(result)
+    ids.find({'reg':{'$eq':Region}}).toArray((err, result)=> {
+       res.jsonp(result,req)
     })
 });
   }catch(ex){
