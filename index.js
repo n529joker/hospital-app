@@ -7,7 +7,7 @@ const app = express()
 const port = process.env.PORT || 3000
 
 app.use(cors({
-  origin:'http://localhost:8100'
+  origin:'http://localhost:5500'
 }
 )) 
 app.use(express.json())
@@ -42,7 +42,7 @@ app.get('/',async(req, res)=>{
 })
 
 app.post('/data',async (req,res)=>{
-  let region = req.body.reg
+  let region = req.body.region
   try{
     await client.connect(err => {
     console.log("MongoDB connected")
