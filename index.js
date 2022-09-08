@@ -14,6 +14,9 @@ const uri = "mongodb+srv://infinitycloud:Rawlings004@infinitycloud.0vlqb7r.mongo
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 let collection;
+app.get('/',(req,res)=>{
+  res.send('add /fdata to the url')
+})
 app.post('/data',async (req,res)=>{
   let Region = req.body.region
   try{
@@ -31,7 +34,7 @@ app.post('/data',async (req,res)=>{
     await client.close()
   }
 })
-app.get('/fdata',(req,res)=>{
+app.get('/fdata',async (req,res)=>{
   try{
     await client.connect(err => {
     console.log("MongoDB connected")
