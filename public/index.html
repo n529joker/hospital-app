@@ -14,6 +14,7 @@
      try{
        let data = await fetch('https://ipgeolocation.abstractapi.com/v1/?api_key=ae155d7394704c93be9c72486e2bd7f5')
        let fdata = await data.json()
+       console.log(fdata)
        let reg = localStorage.getItem('region')
        if(reg == null || reg == undefined || reg !== fdata.regionName){
         localStorage.setItem('region',`${fdata.region}`)
