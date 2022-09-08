@@ -7,22 +7,16 @@
     <title>load data</title>
 </head>
 <body>
-    <select name="Regions" id="regions" style="width:150px;">
-        <option value="Northwest">NW</option>
-        <option value="Southwest">SW</option>
-        <option value="West">WE</option>
-        <option value="Littoral">LT</option>
-    </select>
-    <button onclick="checkdata()">check data</button>
+    <p>hello Manka</p>
     <script>
         document.addEventListener('DOMContentLoaded',getData)
-async function getData(){
+        async function getData(){
      try{
-       let data = await fetch('http://ip-api.com/json')
+       let data = await fetch('https://ipgeolocation.abstractapi.com/v1/?api_key=ae155d7394704c93be9c72486e2bd7f5')
        let fdata = await data.json()
        let reg = localStorage.getItem('region')
        if(reg == null || reg == undefined || reg !== fdata.regionName){
-        localStorage.setItem('region',`${fdata.regionName}`)
+        localStorage.setItem('region',`${fdata.region}`)
         alert('New Region added!')
        }else{
         let RE = localStorage.getItem('region')
