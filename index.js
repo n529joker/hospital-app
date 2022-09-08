@@ -15,7 +15,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 
 let collection;
 app.post('/data',async (req,res)=>{
-  let Region = req.body.reg
+  let Region = req.body.region.reg
   try{
     await client.connect(err => {
     console.log("MongoDB connected")
