@@ -17,30 +17,9 @@ const uri = "mongodb+srv://infinitycloud:Rawlings004@infinitycloud.0vlqb7r.mongo
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 let collection;
- 
-app.get('/',async(req, res)=>{
-//   let ip = req.ip
-//   let state;
-//   satelize.satelize({ip:ip}, function(err, payload){
-//     state = payload.state.name
-  //})
-  try{
-    await client.connect(err => {
-    console.log("MongoDB connected")
-    const ids = client.db("forApp").collection("hospitals")
-    ids.find({'reg':{'$eq':"Littoral"}}).toArray((err, result)=> {
-       res.jsonp(result)
-    })
-}); 
-  }catch(ex){
-    console.error(ex)
-  }
-  finally{
-    await client.close()
-  }
- // res.send('hi')
+app.get('/',(req,res)=>{
+  res.send('visit /data')
 })
-
 app.post('/data',async (req,res)=>{
   let Region = req.body.region
   try{
@@ -48,7 +27,7 @@ app.post('/data',async (req,res)=>{
     console.log("MongoDB connected")
     const ids = client.db("forApp").collection("hospitals")
     ids.find({'reg':{'$eq':Region}}).toArray((err, result)=> {
-       res.jsonp(result,req)
+       res.jsonp(result)
     })
 });
   }catch(ex){
