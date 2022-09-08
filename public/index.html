@@ -39,7 +39,7 @@
        body: JSON.stringify(region)
       }
     try{       
-        let sdata = await fetch('https://hospitalcmr.herokuapp.com/data', data)
+        let sdata = await fetch('/data', data)
         let resdata = await sdata.json()
         console.log(resdata)
         }
