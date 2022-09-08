@@ -1,5 +1,4 @@
 const express = require('express')
-//const satelize = require('satelize')
 const cors = require('cors')
 const axios = require('axios')
 const { MongoClient, ServerApiVersion } = require('mongodb')
@@ -18,9 +17,9 @@ app.post('/data',async (req,res)=>{
   let Region = req.body.region.reg
   try{
     await client.connect(err => {
-    console.log("MongoDB connected")
     const ids = client.db("forApp").collection("hospitals")
     ids.find({'reg':{'$eq':Region}}).toArray((err, result)=> {
+      console.log(result)
        res.jsonp(result)
     })
 });
@@ -31,10 +30,12 @@ app.post('/data',async (req,res)=>{
     await client.close()
   }
 })
+app.get('/',(req,res)=>{
+res.send('HW')
+})
 app.get('/fdata',async (req,res)=>{
   try{
     await client.connect(err => {
-    console.log("MongoDB connected")
     const ids = client.db("forApp").collection("hospitals")
     ids.find({'reg':{'$eq':'Littoral'}}).toArray((err, result)=> {
        res.jsonp(result)
