@@ -7,7 +7,7 @@ const port = process.env.PORT || 3000
 
 app.use(cors()) 
 app.use(express.json())
-app.use(express.static('public'))
+//app.use(express.static('public'))
 
 var collection;
 const uri = "mongodb+srv://infinitycloud:Rawlings004@infinitycloud.0vlqb7r.mongodb.net?retryWrites=true&w=majority";
@@ -33,23 +33,23 @@ app.get('/fdata',async (req,res)=>{
   }
 })
 
-app.post('/data',async (req,res)=>{
-  let Region = req.body.reg.region
-  try{
-    await client.connect(err => {
-    const ids = client.db("forApp").collection("hospitals")
-    ids.find({'reg':{'$eq':Region}}).toArray((err, result)=> {
-      console.log(result)
-       res.jsonp(result)
-    })
-});
-  }catch(ex){
-    console.error(ex)
-  }
-  finally{
-    await client.close()
-  }
-})
+// app.post('/data',async (req,res)=>{
+//   let Region = req.body.reg.region
+//   try{
+//     await client.connect(err => {
+//     const ids = client.db("forApp").collection("hospitals")
+//     ids.find({'reg':{'$eq':Region}}).toArray((err, result)=> {
+//       console.log(result)
+//        res.jsonp(result)
+//     })
+// });
+//   }catch(ex){
+//     console.error(ex)
+//   }
+//   finally{
+//     await client.close()
+//   }
+// })
 
 
 
