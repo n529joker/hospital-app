@@ -31,6 +31,22 @@ app.post('/data',async (req,res)=>{
     await client.close()
   }
 })
+app.get('/fdata',(req,res)=>{
+  try{
+    await client.connect(err => {
+    console.log("MongoDB connected")
+    const ids = client.db("forApp").collection("hospitals")
+    ids.find({'reg':{'$eq':'Littoral'}}).toArray((err, result)=> {
+       res.jsonp(result)
+    })
+});
+  }catch(ex){
+    console.error(ex)
+  }
+  finally{
+    await client.close()
+  }
+})
 app.listen(port,()=>{
   console.log(`app running on port ${port}`);
 }) 
